@@ -11,6 +11,10 @@ psutil = "^5.9.6"
 requests = "^2.31.0"
 tqdm = "^4.66.1"
 
+[tool.poetry.group.dev.dependencies]
+jupyter = "^1.0.0"
+notebook = "^7.0.6"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
