@@ -2,11 +2,11 @@
 name = "get"
 version = "1.0"
 description = ""
-authors = ["BlackWhite"]
+authors = ["BlackWhite <jierong8215@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.10"
 psutil = "^5.9.6"
 requests = "^2.31.0"
 tqdm = "^4.66.1"

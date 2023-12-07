@@ -64,18 +64,6 @@ def get_remote_file_size(url, max_retries=5):
     return None
 
 
-def post_api_data(api_url, json):
-    "post请求-弃用"
-    try:
-        response = requests.post(api_url, json)
-        response.raise_for_status()
-        data = response.json()
-        return data
-    except requests.exceptions.RequestException as e:
-        print("报错:", e)
-        return None
-
-
 def message_status(data, message=None, code=None):
     "消息模板"
     if not data:
