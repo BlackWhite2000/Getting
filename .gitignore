@@ -4,3 +4,4 @@
 *job_manager.log
 *log
 poetry.lock
+dist
