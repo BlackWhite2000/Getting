@@ -7,6 +7,9 @@ from datetime import datetime
 import psutil
 import requests
 from tqdm import tqdm
+from typing import Union, Literal
+import re
+import sys
 
 
 def download(
@@ -322,3 +325,82 @@ def log_and_print(message, log_dir, log_path, is_print=True):
     if is_print:
         print(log_message)
     return message
+
+
+def is_file_in_directory(directory, file_name):
+    "查询文件是否存在"
+    file_path = os.path.join(directory, file_name)
+    return os.path.isfile(file_path)
+
+
+def is_file_with_name_in_directory(directory, file_name):
+    "查询文件是否存在 - 忽略格式名"
+    for filename in os.listdir(directory):
+        if filename.startswith(file_name):
+            return True
+    return False
+
+
+def delimiter_name_extract(
+    filename,
+    delimiters=["[]", "【】"],
+    mode: Union[Literal["all"], Literal["num"]] = "all",
+):
+    """
+    通过定界符提取名称
+
+    mode='all' = 提取定界符内全部字符
+
+    mode='num' = 提取定界符内数字
+    """
+
+    valid_modes = ["all", "num"]  # 可接受的 mode 值
+    if mode not in valid_modes:
+        raise ValueError(f"无效的模式。请选择以下模式之一：{', '.join(valid_modes)}")
+
+    if mode == "num":
+        pattern = r"\d+"
+    else:
+        pattern = r"\w+"
+
+    for delim in delimiters:
+        match = re.search(
+            rf"{re.escape(delim[0])}({pattern}){re.escape(delim[1])}", filename
+        )
+        if match:
+            return match.group(1)
+
+    return None
+
+
+def change_extension(filename, new_extension):
+    """
+    修改文件夹内文件的扩展名
+
+    filename = 指定的文件
+
+    new_extension = 新的扩展名
+    """
+    base_name = os.path.splitext(filename)[0]
+    new_filename = f"{base_name}.{new_extension}"
+    return new_filename
+
+
+def batch_change_extension(folder_path, new_extension):
+    """
+    批量修改文件夹内文件的扩展名
+
+    folder_path 文件夹路径
+
+    new_extension 新扩展名
+    """
+    count = 0
+    for folder_name, subfolders, filenames in os.walk(folder_path):
+        for filename in filenames:
+            if not filename.endswith(new_extension):
+                file_path = os.path.join(folder_name, filename)
+                new_filename = change_extension(filename, new_extension)
+                new_file_path = os.path.join(folder_name, new_filename)
+                os.rename(file_path, new_file_path)
+                count += 1
+    return count
