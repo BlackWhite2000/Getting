@@ -4,7 +4,7 @@ version = "1.0.8"
 description = "操作检查各种操作"
 authors = ["BlackWhite <jierong8215@gmail.com>"]
 readme = "README.md"
-repository = "https://github.com/myally/Getting"
+repository = "https://github.com/BlackWhite2000/Getting"
 
 [tool.poetry.dependencies]
 python = "^3.10"
