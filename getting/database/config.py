@@ -9,6 +9,7 @@ class DatabaseConfig:
         self.config = AutoConfig(search_path=env_file_path)
 
     def get_db_config(self):
+        "获取数据库配置"
         return {
             "user": self.config("DB_USER"),
             "password": self.config("DB_PASSWORD"),
