@@ -5,3 +5,4 @@
 *log
 poetry.lock
 dist
+tests.py
