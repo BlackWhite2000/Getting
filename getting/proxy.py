@@ -17,8 +17,9 @@ def proxy(http, https=None):
     "开启代理"
     if https is None:
         https = http
-    os.environ["http_proxy"] = proxy_config(http, https)
-    os.environ["https_proxy"] = proxy_config(http, https)
+    data = proxy_config(http, https)
+    os.environ["http_proxy"] = data["http"]
+    os.environ["https_proxy"] = data["https"]
     print("代理开启!")
 
 
@@ -33,8 +34,9 @@ def test_proxy(http, https=None, url="https://dns.google"):
     "测试代理连接"
     if https is None:
         https = http
-    os.environ["http_proxy"] = proxy_config(http, https)
-    os.environ["https_proxy"] = proxy_config(http, https)
+    data = proxy_config(http, https)
+    os.environ["http_proxy"] = data["http"]
+    os.environ["https_proxy"] = data["https"]
 
     try:
         response = requests.get(url, timeout=5)
