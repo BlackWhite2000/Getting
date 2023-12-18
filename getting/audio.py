@@ -40,3 +40,20 @@ def update_audio_metadata(file_path):
     except Exception as e:
         print(f"处理文件 {file_path} 时发生错误: {e}")
         raise  # 重新引发异常，终止脚本执行
+
+
+def id_to_intid(intid):
+    "文件编号转文件编号id"
+    return int(intid)
+
+
+def intid_to_id(id):
+    "文件编号id转文件编号"
+    intid = int(id)
+    if 1000000 < intid < 10000000:
+        return f"0{intid}"
+    else:
+        if intid == 0:
+            return "00"
+        else:
+            return int(intid)
