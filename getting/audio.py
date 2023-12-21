@@ -42,18 +42,20 @@ def update_audio_metadata(file_path):
         raise  # 重新引发异常，终止脚本执行
 
 
-def id_to_intid(intid):
+def id_to_intid(id):
     "文件编号转文件编号id"
+    intid = "".join(filter(str.isnumeric, id))
     return int(intid)
 
 
-def intid_to_id(id):
+def intid_to_id(intid):
     "文件编号id转文件编号"
-    intid = int(id)
-    if 1000000 < intid < 10000000:
-        return f"0{intid}"
+    intid = "".join(filter(str.isnumeric, intid))
+    id = int(intid)
+    if 1000000 < id < 10000000:
+        return f"0{id}"
     else:
-        if intid == 0:
+        if id == 0:
             return "00"
         else:
-            return int(intid)
+            return int(id)
