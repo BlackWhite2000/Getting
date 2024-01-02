@@ -126,7 +126,8 @@ def plug_cover(
 
     if os.path.exists(output_image_path) and rmtree:
         shutil.rmtree(output_image_path)
-    os.makedirs(output_image_path)
+    if not os.path.exists(output_image_path):
+        os.makedirs(output_image_path)
 
     settings = settingsPlugCover(
         input_image_path=os.path.join(
@@ -276,7 +277,8 @@ def plug_cover_center(
 
     if os.path.exists(output_image_path) and rmtree:
         shutil.rmtree(output_image_path)
-    os.makedirs(output_image_path)
+    if not os.path.exists(output_image_path):
+        os.makedirs(output_image_path)
 
     settings = settingsPlugCoverCenter(
         input_image_path=os.path.join(
