@@ -154,6 +154,38 @@ def plug_cover(
     print(f"图片 {title_name} 处理完成")
 
 
+class settingsPlugCoverCenter:
+    "插件封面配置"
+
+    def __init__(
+        self,
+        input_image_path,
+        output_image_path,
+        title,
+        text,
+        title_font_path,
+        text_font_path,
+        title_font_size,
+        text_font_size,
+        title_color,
+        text_color,
+        text_spacing,
+        title_spacing,
+    ):
+        self.input_image_path = input_image_path
+        self.output_image_path = output_image_path
+        self.title = title
+        self.text = text
+        self.title_font_path = title_font_path
+        self.text_font_path = text_font_path
+        self.title_font_size = title_font_size
+        self.text_font_size = text_font_size
+        self.title_color = title_color
+        self.text_color = text_color
+        self.text_spacing = text_spacing
+        self.title_spacing = title_spacing
+
+
 def settings_plug_cover_center(settings):
     "生成插件封面"
     # 打开原始图片
@@ -244,7 +276,7 @@ def plug_cover_center(
         shutil.rmtree(output_image_path)
     os.makedirs(output_image_path)
 
-    settings = settingsPlugCover(
+    settings = settingsPlugCoverCenter(
         input_image_path=os.path.join(
             input_image_path, "image", "cover_background.png"
         ),
