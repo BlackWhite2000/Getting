@@ -98,6 +98,7 @@ def plug_cover(
     text_x=350,
     text_y=180,
     align="left",
+    rmtree=False,
 ):
     "生成插件封面"
 
@@ -123,7 +124,7 @@ def plug_cover(
     if not os.path.exists(input_image_path):
         os.makedirs(input_image_path)
 
-    if os.path.exists(output_image_path):
+    if os.path.exists(output_image_path) and rmtree:
         shutil.rmtree(output_image_path)
     os.makedirs(output_image_path)
 
@@ -247,6 +248,7 @@ def plug_cover_center(
     text_font_size=45,
     title_color=(0, 0, 0),
     text_color=(111, 111, 111),
+    rmtree=False,
 ):
     "生成插件封面"
 
@@ -272,7 +274,7 @@ def plug_cover_center(
     if not os.path.exists(input_image_path):
         os.makedirs(input_image_path)
 
-    if os.path.exists(output_image_path):
+    if os.path.exists(output_image_path) and rmtree:
         shutil.rmtree(output_image_path)
     os.makedirs(output_image_path)
 
