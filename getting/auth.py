@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import jwt
 
 
@@ -11,15 +11,14 @@ def token(secret_key, payload, exp=None):
     return data
 
 
-def verify_token(token, secret_key):
+def verify_token(secret_key, token):
     "验证token是否过期失效"
     try:
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
         # 检查令牌是否过期
-        if (
-            "exp" in payload
-            and datetime.utcfromtimestamp(payload["exp"]) > datetime.utcnow()
-        ):
+        if "exp" in payload and datetime.fromtimestamp(
+            payload["exp"], timezone.utc
+        ) > datetime.now(timezone.utc):
             return True
     except jwt.ExpiredSignatureError:
         # 令牌过期
@@ -29,7 +28,7 @@ def verify_token(token, secret_key):
         return False
 
 
-def decode_token(token, secret_key):
+def decode_token(secret_key, token):
     "解密token"
     try:
         payload = jwt.decode(token, secret_key, algorithms=["HS256"])
