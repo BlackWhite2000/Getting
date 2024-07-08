@@ -309,7 +309,7 @@ class Gitea:
         location="",
         website="",
         full_name="",
-        visibility=2,
+        visibility="private",
     ):
         assert isinstance(owner, User)
         result = self.requests_post(
