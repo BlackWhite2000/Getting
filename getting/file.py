@@ -19,6 +19,7 @@ def download(
     max_retries=10,
     timeout=(5, 30),
     chunk_size=99 * 1024 * 1024,
+    get_file_extension=True,
 ):
     "下载文件 下载速度控制3mb =  3 * 1024 * 1024"
     # 创建保存文件夹
@@ -38,7 +39,10 @@ def download(
                 file_extension = mimetypes.guess_extension(content_type) or ""
 
                 if custom_name:
-                    file_name = custom_name + file_extension
+                    if get_file_extension:
+                        file_name = custom_name + file_extension
+                    else:
+                        file_name = custom_name
                 else:
                     # 生成时间戳+随机数作为文件名
                     timestamp = int(time.time())
@@ -231,7 +235,9 @@ def check_disk_usage(path, percent=90, task_print=False, task_name=""):
     usage_percent = partition.percent
     usage = usage_percent > percent
     if usage and task_print:
-        print(f"-----------------------------------磁盘使用率超过{percent}%，停止{task_name}任务。")
+        print(
+            f"-----------------------------------磁盘使用率超过{percent}%，停止{task_name}任务。"
+        )
     return usage
 
 
