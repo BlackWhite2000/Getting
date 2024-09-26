@@ -250,6 +250,7 @@ def plug_cover_center(
     title_color=(0, 0, 0),
     text_color=(111, 111, 111),
     rmtree=False,
+    title_spacing=-15,
 ):
     "生成插件封面"
 
@@ -294,7 +295,7 @@ def plug_cover_center(
         title_color=title_color,
         text_color=text_color,
         text_spacing=30,
-        title_spacing=-15,
+        title_spacing=title_spacing,
     )
 
     # 调用函数并传递参数对象

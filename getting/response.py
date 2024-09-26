@@ -72,7 +72,8 @@ def message_status(data, message=None, code=None):
             message = "请求错误"
     else:
         code = 200
-        message = "请求成功"
+        if message is None:
+            message = "请求成功"
     return {"code": code, "message": message, "data": data}
 
 
