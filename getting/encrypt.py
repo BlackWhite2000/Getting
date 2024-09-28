@@ -42,40 +42,51 @@ import os
 import base64
 import json
 
-# 当前脚本路径
-path = os.path.dirname(os.path.abspath(__file__))
-# 拼接公钥、私钥文件路径
-pub_key_path = os.path.join(path, "pub.pem")
-pri_key_path = os.path.join(path, "pri.pem")
+# # 当前脚本路径
+# path = os.path.dirname(os.path.abspath(__file__))
+# # 拼接公钥、私钥文件路径
+# pub_key_path = os.path.join(path, "pub.pem")
+# pri_key_path = os.path.join(path, "pri.pem")
 
-# 从 PEM 格式公钥文件中读取公钥
-with open(pub_key_path, "rb") as f:
-    PUB_KEY = rsa.PublicKey.load_pkcs1(f.read(), format="PEM")
-# 从 PEM 格式私钥文件中读取私钥
-with open(pri_key_path, "rb") as f:
-    PRI_KEY = rsa.PrivateKey.load_pkcs1(f.read(), format="PEM")
+# 读取公钥
+def read_pub_key(path):
+    """
+    读取公钥
+    """
+    with open(path, "rb") as f:
+        pub_key = rsa.PublicKey.load_pkcs1(f.read(), format="PEM")
+    return pub_key
+
+# 读取私钥
+def read_pri_key(path):
+    """
+    读取私钥
+    """
+    with open(path, "rb") as f:
+        pri_key = rsa.PrivateKey.load_pkcs1(f.read(), format="PEM")
+    return pri_key
 
 # RSA加密
-def rsa_encrypt(data):
+def rsa_encrypt(data,pub_key):
     """
     RSA加密
 
     data: 待加密数据
     """
     # 使用公钥加密
-    encrypted_data = rsa.encrypt(data.encode(), PUB_KEY)
+    encrypted_data = rsa.encrypt(data.encode(), pub_key)
     # 将加密后的数据进行 Base64 编码以便传输
     return base64.b64encode(encrypted_data).decode()
 
 # RSA解密
-def rsa_decrypt(rData):
+def rsa_decrypt(rData,pri_key):
     """
     RSA解密
 
     rData: 加密数据
     """
     decoded_data = base64.b64decode(rData)
-    decrypted_data = rsa.decrypt(decoded_data, PRI_KEY)
+    decrypted_data = rsa.decrypt(decoded_data, pri_key)
     return decrypted_data.decode()
 
 # 解密ARS加密数据再解密AES加密数据
