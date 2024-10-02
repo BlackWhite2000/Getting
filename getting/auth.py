@@ -5,7 +5,7 @@ import jwt
 def token(secret_key, payload, exp=None):
     "生成token"
     payload = {
-        "exp": exp or datetime.utcnow() + timedelta(days=30),  # 设置过期时间
+        "exp": exp or datetime.now(timezone.utc) + timedelta(days=30),  # 设置过期时间
     }
     data = jwt.encode(payload, secret_key, algorithm="HS256")
     return data
