@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "getting"
-version = "1.3.9"
+version = "1.4.0"
 description = "操作检查各种操作"
 authors = ["BlackWhite <jierong8215@gmail.com>"]
 readme = "README.md"
