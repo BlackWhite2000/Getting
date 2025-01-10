@@ -20,6 +20,7 @@ python-decouple = "^3.8"
 pymysql = "^1.1.0"
 rsa = "^4.9"
 pycryptodome = "^3.20.0"
+loguru = "0.7.3"
 
 [tool.poetry.group.dev.dependencies]
 jupyter = "^1.0.0"
